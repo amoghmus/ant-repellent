@@ -1,0 +1,25 @@
+import time
+import picamera
+import datetime
+import argparse
+import cv2
+
+IMAGE_DIR = '/home/pi/ant_images'
+SLEEP_TIME = 2
+
+def take_pics():
+     with picamera.PiCamera() as camera:
+         for ii in range(1,3):
+              filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")+".jpeg"
+              # camera.resolution = (256, 256)
+              camera.resolution = (1920, 1080)
+              # camera.resolution = (2592, 1944)
+              camera.start_preview()
+              # camera.capture('/home/pi/images/image_{}.jpg'.format(ii))
+              image_path = IMAGE_DIR + '/' + filename
+              camera.capture(image_path)
+              time.sleep(SLEEP_TIME)
+
+
+if __name__ == '__main__':
+     take_pics()
